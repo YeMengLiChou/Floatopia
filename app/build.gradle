@@ -1,0 +1,64 @@
+//file:noinspection DependencyNotationArgument
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'org.jetbrains.kotlin.kapt'
+    id 'com.google.devtools.ksp'
+    id 'therouter'
+}
+
+def cfg = rootProject.ext
+
+android {
+    namespace 'cn.csd.floatopia'
+    compileSdk cfg.android.compileSdk
+
+    defaultConfig {
+        applicationId cfg.applicationId.app
+        minSdk cfg.android.minSdk
+        targetSdk cfg.android.targetSdk
+        versionCode cfg.android.versionCode
+        versionName cfg.android.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlin {
+        jvmToolchain(17)
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
+}
+
+
+// app 模块使用 implementation 依赖
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // the router
+    implementation cfg.commonLibs.theRouter
+    kapt cfg.commonLibs.theRouterApt
+
+    implementation project(":lib_common")
+    implementation project(":lib_framework")
+    implementation project(":lib_glide")
+    implementation project(":lib_network")
+    implementation project(":lib_room")
+    implementation project(":mod_main")
+}
+

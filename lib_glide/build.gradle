@@ -1,0 +1,66 @@
+//file:noinspection DependencyNotationArgument
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'com.google.devtools.ksp'
+}
+
+def cfg = rootProject.ext
+
+android {
+    namespace 'cn.csd.lib_glide'
+    compileSdk cfg.android.compileSdk
+    resourcePrefix "glide_"
+
+    defaultConfig {
+        minSdk cfg.android.minSdk
+        targetSdk cfg.android.targetSdk
+        versionCode cfg.android.versionCode
+        versionName cfg.android.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+        // 编译 cpp 文件
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++17"
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlin {
+        jvmToolchain(17)
+    }
+
+    externalNativeBuild {
+        cmake {
+            path file('src/main/cpp/CMakeLists.txt')
+        }
+    }
+}
+
+dependencies {
+    testImplementation cfg.testLibs.junit
+    androidTestImplementation cfg.testLibs.extJunit
+    androidTestImplementation cfg.testLibs.espressoCore
+
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // glide
+    api cfg.commonLibs.glide
+    
+    implementation project(":lib_framework")
+}
+

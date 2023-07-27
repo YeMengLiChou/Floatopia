@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<!--  需要要添加该组件所需要的权限  -->
+
+
+<!--  需要声明启动的 Activity  -->
+<!--    <application-->
+<!--        android:allowBackup="false"-->
+<!--        android:icon="@mipmap/"-->
+<!--        android:label="@string/"-->
+<!--        android:supportsRtl="true"-->
+<!--        tools:targetApi="33">-->
+<!--        <activity-->
+<!--            android:name=""-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
+<!--        <activity-->
+<!--            android:name=""-->
+<!--            android:exported="true">-->
+<!--        </activity>-->
+<!--    </application>-->
+
+
+</manifest>

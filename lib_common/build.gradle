@@ -1,0 +1,59 @@
+//file:noinspection DependencyNotationArgument
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'com.google.devtools.ksp'
+    id 'org.jetbrains.kotlin.kapt'
+}
+
+def cfg = rootProject.ext
+
+android {
+    namespace 'cn.csd.lib_common'
+    compileSdk cfg.android.compileSdk
+
+    resourcePrefix "common_"
+
+    defaultConfig {
+        minSdk cfg.android.minSdk
+        targetSdk cfg.android.targetSdk
+        versionCode cfg.android.versionCode
+        versionName cfg.android.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlin {
+        jvmToolchain(17)
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
+}
+
+dependencies {
+    testImplementation cfg.testLibs.junit
+    androidTestImplementation cfg.testLibs.extJunit
+    androidTestImplementation cfg.testLibs.espressoCore
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation cfg.commonLibs.theRouter
+    kapt cfg.commonLibs.theRouterApt
+
+}
+

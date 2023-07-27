@@ -1,0 +1,142 @@
+/**
+ * 全局配置
+ *
+ * */
+ext {
+    isRunAlone = false // 管理组件开启，true为组件单独开发，false为集成开发
+
+    // build.gradle 文件的配置信息
+    android = [
+
+            minSdk     : 24,
+            targetSdk  : 33,
+            compileSdk : 33,
+            versionCode: 1,
+            versionName: "1.0"
+    ]
+    // 单独调试时设置
+    applicationId = [
+            app               : "cn.csd.floatopia",
+            main              : "cn.csd.floatopia.main",
+    ]
+
+    // 依赖的版本管理
+    versions = [
+            annotation        : "1.6.0",
+            coreKtx           : "1.10.1",
+            appCompat         : "1.6.1",
+            material          : "1.9.0",
+            junit             : "4.13.2",
+            extJunit          : "1.1.5",
+            espressoCore      : "3.5.1",
+            // the router
+            theRouter         : "1.2.0-beta4",
+
+            room              : "2.5.2",
+
+            retrofit          : "2.9.0",
+            // glide
+            glide             : "4.15.1",
+            // lifecycle
+            lifecycle         : "2.6.1",
+            // activity extensions
+            activityKtx       : "1.7.2",
+            // fragment extensions
+            fragmentKtx       : "1.6.0",
+            // gson
+            gson              : "2.10.1",
+            // kotlin coroutines
+            coroutines        : "1.7.2",
+            // swipe refresh layout
+            swipeRefreshLayout: "1.1.0",
+            // okhttp3
+            okhttp3           : "4.9.0",
+            // fastKv
+            fastKv            : "2.0.1",
+            // tracing
+            tracing           : "1.1.0",
+            // xlog
+            xlog              : "1.11.0",
+
+            constraintLayout  : "2.1.4",
+    ]
+
+
+    testLibs = [
+            // use testImplementation
+            junit: "junit:junit:${versions["junit"]}",
+            // use androidTestImplementation
+            extJunit    : "androidx.test.ext:junit:${versions["extJunit"]}",
+            // use androidTestImplementation
+            espressoCore: "androidx.test.espresso:espresso-core:${versions["espressoCore"]}",
+    ]
+
+    // 必要依赖，底层库使用 api 依赖，其他依赖了底层库的无需依赖(依赖向上传递)
+    apiLibs = [
+            /**
+             * 当出现 No such enum entry LIBRARY_GROUP_PREFIX in org.jetbrains.kotlin.ir.types.impl.IrSimpleTypeImpl@463f430a 时
+             * 在对应出错的模块上用 implementation方式依赖该库
+             * */
+            annotation      : "androidx.annotation:annotation:${versions["annotation"]}",
+            coreKtx         : "androidx.core:core-ktx:${versions["coreKtx"]}",
+            appCompat       : "androidx.appcompat:appcompat:${versions["appCompat"]}",
+            material        : "com.google.android.material:material:${versions["material"]}",
+            // constraintLayout (use it with api in app module and with compileOnly in sub module when missing class)
+            constraintLayout: "androidx.constraintlayout:constraintlayout:${versions["constraintLayout"]}"
+    ]
+
+    // 通常依赖，使用 implementation 依赖（不会向上传递）
+    commonLibs = [
+            theRouter          : "cn.therouter:router:${versions["theRouter"]}",
+            // use kapt
+            theRouterApt       : "cn.therouter:apt:${versions["theRouter"]}",
+
+            glide              : "com.github.bumptech.glide:glide:${versions["glide"]}",
+
+            activityKtx        : "androidx.activity:activity-ktx:${versions["activityKtx"]}",
+            fragmentKtx        : "androidx.fragment:fragment-ktx:${versions["fragmentKtx"]}",
+
+            // viewModel
+            viewModel          : "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions["lifecycle"]}",
+            viewModelSavedstate: "androidx.lifecycle:lifecycle-viewmodel-savedstate:${versions["lifecycle"]}",
+
+            lifecycleRuntime   : "androidx.lifecycle:lifecycle-runtime-ktx:${versions["lifecycle"]}",
+            // ksp annotation processor
+            lifecycleCompiler  : "androidx.lifecycle:lifecycle-compiler:${versions["lifecycle"]}",
+
+            // gson
+            gson               : "com.google.code.gson:gson:${versions["gson"]}",
+
+            // coroutines core
+            coroutinesCore     : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions["coroutines"]}",
+            // coroutines for android
+            coroutinesAndroid  : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions["coroutines"]}",
+
+            // room
+            roomRuntime        : "androidx.room:room-runtime:${versions["room"]}",
+            // use ksp annotation processor
+            roomCompiler       : "androidx.room:room-compiler:${versions["room"]}",
+            // room coroutines
+            roomKtx            : "androidx.room:room-ktx:${versions["room"]}",
+
+            // swipe refresh layout
+            swipeRefreshLayout : "androidx.swiperefreshlayout:swiperefreshlayout:${versions["swipeRefreshLayout"]}",
+
+            // retrofit
+            retrofit           : "com.squareup.retrofit2:retrofit:${versions["retrofit"]}",
+            // retrofit gson converter
+            retrofitGson       : "com.squareup.retrofit2:converter-gson:${versions["retrofit"]}",
+
+            // okhttp3
+            // okhttp logging interceptor
+            okhttpLogging      : "com.squareup.okhttp3:logging-interceptor:${versions["okhttp3"]}",
+
+            // fastKv
+            fastKv             : "io.github.billywei01:fastkv:${versions["fastKv"]}",
+
+            tracing            : "androidx.tracing:tracing-ktx:${versions["tracing"]}",
+            // xlog
+            xlog               : "com.elvishew:xlog:${versions["xlog"]}",
+
+    ]
+}

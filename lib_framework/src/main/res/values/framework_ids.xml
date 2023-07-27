@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="framework_click_time_stamp" type="id"/>
+    <item name="framework_click_debounce_action" type="id"/>
+
+</resources>
