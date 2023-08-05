@@ -3,7 +3,6 @@ package cn.csd.mod_main
 import android.os.Bundle
 import android.view.ViewGroup
 import cn.csd.lib_common.constant.ROUTE_MAIN_ACTIVITY_MAIN
-import cn.csd.lib_common.constant.ROUTE_TEST_ACTIVITY_TEST
 import cn.csd.lib_framework.base.activity.BaseBindingActivity
 import cn.csd.lib_framework.ext.click
 import cn.csd.mod_main.databinding.MainActivityMainBinding
@@ -17,7 +16,7 @@ class MainActivity : BaseBindingActivity<MainActivityMainBinding>() {
         super.onCreate(savedInstanceState)
         TheRouter.inject(this)
         binding.root.click {
-            TheRouter.build(ROUTE_TEST_ACTIVITY_TEST).navigation()
+
         }
     }
 

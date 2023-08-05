@@ -49,6 +49,9 @@ android {
 // app 模块使用 implementation 依赖
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation cfg.testLibs.junit
+    androidTestImplementation cfg.testLibs.extJunit
+    androidTestImplementation cfg.testLibs.espressoCore
 
     // the router
     implementation cfg.commonLibs.theRouter
