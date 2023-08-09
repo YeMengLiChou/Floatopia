@@ -7,7 +7,6 @@ ext {
 
     // build.gradle 文件的配置信息
     android = [
-
             minSdk     : 24,
             targetSdk  : 33,
             compileSdk : 33,
@@ -18,6 +17,7 @@ ext {
     applicationId = [
             app               : "cn.csd.floatopia",
             main              : "cn.csd.floatopia.main",
+            achievement       : "cn.csd.floatopia.achievement"
     ]
 
     // 依赖的版本管理
