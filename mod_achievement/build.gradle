@@ -1,0 +1,90 @@
+if (rootProject.ext.isRunAlone) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
+
+apply plugin: 'org.jetbrains.kotlin.kapt'
+apply plugin: 'com.google.devtools.ksp'
+apply plugin: 'org.jetbrains.kotlin.android'
+
+def cfg = rootProject.ext
+
+android {
+    namespace 'cn.csd.mod_achievement'
+    compileSdk cfg.android.compileSdk
+    // 资源前缀
+    resourcePrefix 'achievement_'
+    defaultConfig {
+        // 单独运行需要 applicationId
+        if (cfg.isRunAlone) {
+            applicationId cfg.applicationId.achievement
+        }
+        minSdk cfg.android.minSdk
+        targetSdk cfg.android.targetSdk
+        versionCode cfg.android.versionCode
+        versionName cfg.android.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+
+    // 组件化模式资源切换
+    sourceSets {
+        main {
+            if (rootProject.isRunAlone) {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                // library 模式下排除 debug 文件夹中的所有文件
+                java {
+                    exclude 'debug/**'
+                }
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlin {
+        jvmToolchain(17)
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
+}
+// 其他模块使用 implementation) 依赖
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation cfg.testLibs.junit
+    androidTestImplementation cfg.testLibs.extJunit
+    androidTestImplementation cfg.testLibs.espressoCore
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation cfg.commonLibs.activityKtx
+    implementation cfg.commonLibs.lifecycleRuntime
+    implementation cfg.commonLibs.lifecycleCompiler
+    implementation cfg.commonLibs.coroutinesCore
+    implementation cfg.commonLibs.coroutinesAndroid
+
+    // the router
+    implementation cfg.commonLibs.theRouter
+    kapt cfg.commonLibs.theRouterApt
+
+    implementation project(":lib_framework")
+    implementation project(":lib_common")
+}

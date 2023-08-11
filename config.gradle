@@ -3,7 +3,7 @@
  *
  * */
 ext {
-    isRunAlone = false // 管理组件开启，true为组件单独开发，false为集成开发
+    isRunAlone = true // 管理组件开启，true为组件单独开发，false为集成开发
 
     // build.gradle 文件的配置信息
     android = [
